@@ -34,7 +34,7 @@
               <greeting>This is my fancy message to say hello</greeting>
             </configuration>
             <goals>
-              <goal>sayhi</goal>
+              <goal>createPackage</goal>
             </goals>
           </execution>
         </executions>
