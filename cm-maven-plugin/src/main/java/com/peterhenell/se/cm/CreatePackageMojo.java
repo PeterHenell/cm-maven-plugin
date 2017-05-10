@@ -12,7 +12,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
- * Says "Hi" to the user.
+ * Creates and stores package information
  *
  */
 @Mojo(name = "createPackage")
