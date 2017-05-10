@@ -7,7 +7,12 @@
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>cm-maven-plugin-tester</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/PeterHenell/cm-maven-plugin</url>
+    <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -31,7 +36,8 @@
           <execution>
             <phase>compile</phase>
             <configuration>
-              <greeting>This is my fancy message to say hello</greeting>
+              <pathToGitRepo>C:\src\github\cm-maven-plugin</pathToGitRepo>
+              <branch>master</branch>
             </configuration>
             <goals>
               <goal>createPackage</goal>
