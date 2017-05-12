@@ -14,7 +14,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
- * Says "Hi" to the user.
+ * Creates and stores package information
  *
  */
 @Mojo(name = "createPackage")
