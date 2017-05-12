@@ -80,34 +80,32 @@ public class CreatePackageMojo extends BaseCMMojo {
             int count = 0;
             for (RevCommit rev : logs) {
                 getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
                 count++;
             }
             System.out.println("Had " + count + " commits overall on current branch");
 
-            logs = git.log().add(repository.resolve("remotes/origin/"+ branch)).call();
+            logs = git.log().add(repository.resolve("remotes/origin/" + branch)).call();
             count = 0;
             for (RevCommit rev : logs) {
-                System.out.println(
-                        "Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName()
+                        + ", message: " + rev.getFullMessage());
                 count++;
             }
-            System.out.println("Had " + count + " commits overall on test-branch");
+            System.out.println("Had " + count + " commits overall on " + branch);
 
-            logs = git.log().not(repository.resolve("master")).add(repository.resolve("remotes/origin/"+ branch))
+            logs = git.log().not(repository.resolve("master")).add(repository.resolve("remotes/origin/" + branch))
                     .call();
             count = 0;
             for (RevCommit rev : logs) {
-                System.out.println(
-                        "Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
                 count++;
             }
-            System.out.println("Had " + count + " commits only on test-branch");
+            System.out.println("Had " + count + " commits only on " + branch);
 
             logs = git.log().all().call();
             count = 0;
             for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
                 count++;
             }
             System.out.println("Had " + count + " commits overall in repository");
@@ -117,7 +115,7 @@ public class CreatePackageMojo extends BaseCMMojo {
                     .addPath("README.md").call();
             count = 0;
             for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
                 count++;
             }
             System.out.println("Had " + count + " commits on README.md");
@@ -127,7 +125,7 @@ public class CreatePackageMojo extends BaseCMMojo {
                     .addPath("pom.xml").call();
             count = 0;
             for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
                 count++;
             }
             System.out.println("Had " + count + " commits on pom.xml");
