@@ -2,6 +2,8 @@ package com.peterhenell.se.cm;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -66,74 +68,80 @@ public class CreatePackageMojo extends BaseCMMojo {
 
         try {
             Repository existingRepo = new FileRepositoryBuilder().setGitDir(new File(pathToGitRepo + "\\.git")).build();
-            ListLog(existingRepo);
-
+            List<CommitDTO> commits = ListLog(existingRepo);
+            for (CommitDTO commitDTO : commits) {
+				getLog().info(commitDTO.toString());
+			}           
+            
         } catch (IOException ex) {
             getLog().error("could not get git repo" + ex.getMessage());
         }
     }
 
-    private void ListLog(Repository repository) {
+    private List<CommitDTO> ListLog(Repository repository) {
+    	
+    	List<CommitDTO> commits = new ArrayList<CommitDTO>();
+    	
         try {
             Git git = new Git(repository);
             Iterable<RevCommit> logs = git.log().call();
             int count = 0;
-            for (RevCommit rev : logs) {
-                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            for (RevCommit rev : logs) {              
+                CommitDTO c = new CommitDTO(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(), rev.getId().toString(), rev.getCommitTime() , "", "", "");
+                commits.add(c);
                 count++;
             }
-            System.out.println("Had " + count + " commits overall on current branch");
-
-            logs = git.log().add(repository.resolve("remotes/origin/"+ branch)).call();
-            count = 0;
-            for (RevCommit rev : logs) {
-                System.out.println(
-                        "Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-                count++;
-            }
-            System.out.println("Had " + count + " commits overall on test-branch");
-
-            logs = git.log().not(repository.resolve("master")).add(repository.resolve("remotes/origin/"+ branch))
-                    .call();
-            count = 0;
-            for (RevCommit rev : logs) {
-                System.out.println(
-                        "Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-                count++;
-            }
-            System.out.println("Had " + count + " commits only on test-branch");
-
-            logs = git.log().all().call();
-            count = 0;
-            for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-                count++;
-            }
-            System.out.println("Had " + count + " commits overall in repository");
-
-            logs = git.log()
-                    // for all log.all()
-                    .addPath("README.md").call();
-            count = 0;
-            for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-                count++;
-            }
-            System.out.println("Had " + count + " commits on README.md");
-
-            logs = git.log()
-                    // for all log.all()
-                    .addPath("pom.xml").call();
-            count = 0;
-            for (RevCommit rev : logs) {
-                //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-                count++;
-            }
-            System.out.println("Had " + count + " commits on pom.xml");
+//            System.out.println("Had " + count + " commits overall on current branch");
+            
+//            logs = git.log().add(repository.resolve("remotes/origin/" + branch)).call();
+//            count = 0;
+//            for (RevCommit rev : logs) {
+//                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName()
+//                        + ", message: " + rev.getFullMessage());
+//                count++;
+//            }
+//            System.out.println("Had " + count + " commits overall on " + branch);
+//
+//            logs = git.log().not(repository.resolve("master")).add(repository.resolve("remotes/origin/" + branch))
+//                    .call();
+//            count = 0;
+//            for (RevCommit rev : logs) {
+//                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
+//                count++;
+//            }
+//            System.out.println("Had " + count + " commits only on " + branch);
+//
+//            logs = git.log().all().call();
+//            count = 0;
+//            for (RevCommit rev : logs) {
+//                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
+//                count++;
+//            }
+//            System.out.println("Had " + count + " commits overall in repository");
+//
+//            logs = git.log()
+//                    // for all log.all()
+//                    .addPath("README.md").call();
+//            count = 0;
+//            for (RevCommit rev : logs) {
+//                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
+//                count++;
+//            }
+//            System.out.println("Had " + count + " commits on README.md");
+//
+//            logs = git.log()
+//                    // for all log.all()
+//                    .addPath("pom.xml").call();
+//            count = 0;
+//            for (RevCommit rev : logs) {
+//                getLog().info("Commit: " + rev + ", name: " + rev.getName() + ", id: " + rev.getId().getName());
+//                count++;
+//            }
+//            System.out.println("Had " + count + " commits on pom.xml");
 
         } catch (Exception e) {
             getLog().error(e.getMessage());
         }
+        return commits;
     }
 }
