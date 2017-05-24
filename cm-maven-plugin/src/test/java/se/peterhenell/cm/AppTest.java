@@ -1,4 +1,4 @@
-package com.peterhenell.se.cm;
+package se.peterhenell.cm;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

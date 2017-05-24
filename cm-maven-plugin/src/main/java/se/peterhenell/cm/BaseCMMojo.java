@@ -1,4 +1,4 @@
-package com.peterhenell.se.cm;
+package se.peterhenell.cm;
  
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
