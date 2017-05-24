@@ -1,4 +1,4 @@
-package se.peterhenell.cm;
+package se.peterhenell.cm.parsers;
 
 import se.peterhenell.cm.dto.IssueDTO;
 

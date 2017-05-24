@@ -1,4 +1,4 @@
-package se.peterhenell.cm;
+package se.peterhenell.cm.releasenotes;
 
 import se.peterhenell.cm.dto.CommitDTO;
 import se.peterhenell.cm.dto.IssueDTO;

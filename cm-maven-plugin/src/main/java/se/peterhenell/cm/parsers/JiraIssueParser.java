@@ -3,7 +3,6 @@ package se.peterhenell.cm.parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import se.peterhenell.cm.IssueParser;
 import se.peterhenell.cm.Logging;
 import se.peterhenell.cm.dto.IssueDTO;
 

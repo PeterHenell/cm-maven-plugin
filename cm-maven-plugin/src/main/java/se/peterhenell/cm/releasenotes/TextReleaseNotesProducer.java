@@ -1,4 +1,4 @@
-package se.peterhenell.cm;
+package se.peterhenell.cm.releasenotes;
 
 import java.util.List;
 

@@ -6,7 +6,12 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import se.peterhenell.cm.parsers.GitLogParser;
+import se.peterhenell.cm.parsers.IssueParser;
 import se.peterhenell.cm.parsers.JiraIssueParser;
+import se.peterhenell.cm.releasenotes.ReleaseNoteDTO;
+import se.peterhenell.cm.releasenotes.ReleaseNotesProducer;
+import se.peterhenell.cm.releasenotes.TextReleaseNotesProducer;
 
 /**
  * Creates and stores package information

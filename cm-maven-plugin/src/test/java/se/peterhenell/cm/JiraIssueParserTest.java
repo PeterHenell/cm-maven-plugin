@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.parsers.IssueParser;
 import se.peterhenell.cm.parsers.JiraIssueParser;
 
 /**

@@ -1,4 +1,4 @@
-package se.peterhenell.cm;
+package se.peterhenell.cm.parsers;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +10,11 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
+import se.peterhenell.cm.GitConfig;
+import se.peterhenell.cm.Logging;
 import se.peterhenell.cm.dto.CommitDTO;
 import se.peterhenell.cm.dto.IssueDTO;
-
-
+import se.peterhenell.cm.releasenotes.ReleaseNoteDTO;
 
 public class GitLogParser {
 
@@ -23,20 +24,18 @@ public class GitLogParser {
 		this.issueParser = issueParser;
 	}
 
-	private Repository getRepository(GitConfig gitConfig){
-		try {
-            Repository existingRepo = new FileRepositoryBuilder().setGitDir(new File(gitConfig.getPathToGitRepo() + "\\.git")).build();
-            return existingRepo;
-        } catch (IOException ex) {
-            Logging.getLog().error("could not get git repo" + ex.getMessage());            
-        }
-		return null;
+	private Repository getRepository(GitConfig gitConfig) throws IOException {
+		Repository repo = new FileRepositoryBuilder().setGitDir(new File(gitConfig.getPathToGitRepo() + "\\.git"))
+				.build();
+		return repo;
 	}
-	
+
 	public List<ReleaseNoteDTO> getGitLog(GitConfig gitConfig) {
 		List<ReleaseNoteDTO> commits = new ArrayList<>();
-		Repository repository = getRepository(gitConfig);
+
 		try {
+			Repository repository = getRepository(gitConfig);
+
 			Git git = new Git(repository);
 			Iterable<RevCommit> logs = git.log().call();
 
@@ -55,5 +54,4 @@ public class GitLogParser {
 		}
 		return commits;
 	}
-
 }
