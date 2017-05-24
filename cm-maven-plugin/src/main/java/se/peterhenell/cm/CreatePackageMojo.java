@@ -9,9 +9,9 @@ import org.apache.maven.plugins.annotations.Parameter;
 import se.peterhenell.cm.parsers.GitLogParser;
 import se.peterhenell.cm.parsers.IssueParser;
 import se.peterhenell.cm.parsers.JiraIssueParser;
+import se.peterhenell.cm.releasenotes.JsonReleaseNotesProducer;
 import se.peterhenell.cm.releasenotes.ReleaseNoteDTO;
 import se.peterhenell.cm.releasenotes.ReleaseNotesProducer;
-import se.peterhenell.cm.releasenotes.TextReleaseNotesProducer;
 
 /**
  * Creates and stores package information
@@ -49,7 +49,7 @@ public class CreatePackageMojo extends BaseCMMojo {
     @Parameter(property = "createPackage.packageStatus", defaultValue = "Building")
     private String packageStatus;
     
-    @Parameter(property = "git.config")
+    @Parameter(property = "gitConfig")
     private GitConfig gitConfig;
 
     public void execute() throws MojoExecutionException {
@@ -62,7 +62,7 @@ public class CreatePackageMojo extends BaseCMMojo {
         
         List<ReleaseNoteDTO> notes = parser.getGitLog(gitConfig);
  
-        ReleaseNotesProducer producer = new TextReleaseNotesProducer();
+        ReleaseNotesProducer producer = new JsonReleaseNotesProducer();
         
         producer.Produce(notes);       
     }

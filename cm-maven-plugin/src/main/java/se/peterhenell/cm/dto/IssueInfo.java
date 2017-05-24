@@ -1,8 +1,8 @@
 package se.peterhenell.cm.dto;
 
-public class IssueDTO {
+public class IssueInfo {
 
-	public static final IssueDTO UnknownIssue = IssueDTO.create("Uknown", "Unknown", "No comment");
+	public static final IssueInfo UnknownIssue = IssueInfo.create("Uknown", "Unknown", "No comment");
 
 	private String issue;
 	private String projectKey;
@@ -10,14 +10,14 @@ public class IssueDTO {
 
 	@Override
 	public String toString() {
-		return "IssueDTO [issue=" + issue + ", projectKey=" + projectKey + ", comment=" + comment + "]";
+		return "Issue [issue=" + issue + ", projectKey=" + projectKey + ", comment=" + comment + "]";
 	}
 
-	private IssueDTO() {
+	private IssueInfo() {
 	}
 
-	public static IssueDTO create(String projectKey, String jiraIssue, String comment) {
-		IssueDTO k = new IssueDTO();
+	public static IssueInfo create(String projectKey, String jiraIssue, String comment) {
+		IssueInfo k = new IssueInfo();
 		k.projectKey = projectKey;
 		k.issue = jiraIssue;		
 		k.comment = comment;

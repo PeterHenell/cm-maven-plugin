@@ -1,6 +1,6 @@
 package se.peterhenell.cm.dto;
 
-public class CommitDTO {
+public class CommitInfo {
 
 	String message;
 	String committedBy;
@@ -8,7 +8,7 @@ public class CommitDTO {
 	int committedAt;
 	
 
-	public CommitDTO(String message, String committedBy, String commitId, int committedAt) {
+	public CommitInfo(String message, String committedBy, String commitId, int committedAt) {
 		super();
 		this.message = message;
 		this.committedBy = committedBy;
@@ -18,7 +18,7 @@ public class CommitDTO {
 
 	@Override
 	public String toString() {
-		return "CommitDTO [message=" + message + ", committedBy=" + committedBy + ", commitId=" + commitId
+		return "Commit [message=" + message + ", committedBy=" + committedBy + ", commitId=" + commitId
 				+ ", committedAt=" + committedAt + "]";
 	}
 

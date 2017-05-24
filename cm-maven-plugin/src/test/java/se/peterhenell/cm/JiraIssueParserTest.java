@@ -3,7 +3,7 @@ package se.peterhenell.cm;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.dto.IssueInfo;
 import se.peterhenell.cm.parsers.IssueParser;
 import se.peterhenell.cm.parsers.JiraIssueParser;
 
@@ -26,7 +26,7 @@ public class JiraIssueParserTest
     public void testApp()
     {
     	IssueParser parser = new JiraIssueParser();
-    	IssueDTO dto = parser.parse("NSWAG-5955 Providing better comment");
+    	IssueInfo dto = parser.parse("NSWAG-5955 Providing better comment");
     	
     	assertEquals("5955", dto.getIssue());
     	assertEquals("NSWAG", dto.getProjectKey());

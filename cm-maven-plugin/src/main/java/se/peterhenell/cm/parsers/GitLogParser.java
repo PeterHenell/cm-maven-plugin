@@ -12,8 +12,8 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import se.peterhenell.cm.GitConfig;
 import se.peterhenell.cm.Logging;
-import se.peterhenell.cm.dto.CommitDTO;
-import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.dto.CommitInfo;
+import se.peterhenell.cm.dto.IssueInfo;
 import se.peterhenell.cm.releasenotes.ReleaseNoteDTO;
 
 public class GitLogParser {
@@ -40,9 +40,9 @@ public class GitLogParser {
 			Iterable<RevCommit> logs = git.log().call();
 
 			for (RevCommit rev : logs) {
-				IssueDTO jiraIssue = issueParser.parse(rev.getFullMessage());
+				IssueInfo jiraIssue = issueParser.parse(rev.getFullMessage());
 
-				CommitDTO commit = new CommitDTO(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(),
+				CommitInfo commit = new CommitInfo(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(),
 						rev.getId().toString(), rev.getCommitTime());
 
 				ReleaseNoteDTO releaseNote = new ReleaseNoteDTO(commit, jiraIssue);

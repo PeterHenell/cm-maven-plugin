@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import se.peterhenell.cm.Logging;
-import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.dto.IssueInfo;
 
 public class JiraIssueParser implements IssueParser {
 
@@ -12,8 +12,8 @@ public class JiraIssueParser implements IssueParser {
 	}
 
 	@Override
-	public IssueDTO parse(String gitCommitMessage) {
-		IssueDTO dto = IssueDTO.UnknownIssue;
+	public IssueInfo parse(String gitCommitMessage) {
+		IssueInfo dto = IssueInfo.UnknownIssue;
 		
 		Pattern r = Pattern.compile("(.*)-(\\d+)(.*)");
 
@@ -24,7 +24,7 @@ public class JiraIssueParser implements IssueParser {
 				String jiraIssue = m.group(2).trim();
 				String message = m.group(3).trim();
 
-				dto = IssueDTO.create(projectKey, jiraIssue, message);
+				dto = IssueInfo.create(projectKey, jiraIssue, message);
 			}
 		}
 		

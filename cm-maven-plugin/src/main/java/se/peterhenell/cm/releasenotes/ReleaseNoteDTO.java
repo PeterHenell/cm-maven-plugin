@@ -1,37 +1,37 @@
 package se.peterhenell.cm.releasenotes;
 
-import se.peterhenell.cm.dto.CommitDTO;
-import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.dto.CommitInfo;
+import se.peterhenell.cm.dto.IssueInfo;
 
 public class ReleaseNoteDTO {
 
-	private IssueDTO jiraIssueDTO;
-	private CommitDTO commitDTO;
+	private IssueInfo jiraIssue;
+	private CommitInfo commit;
 
 	@Override
 	public String toString() {
-		return "ReleaseNoteDTO [jiraIssueDTO=" + jiraIssueDTO + ", commitDTO=" + commitDTO + "]";
+		return "ReleaseNoteDTO [jiraIssue=" + jiraIssue + ", commit=" + commit + "]";
 	}
 
-	public ReleaseNoteDTO(CommitDTO commitDTO, IssueDTO jiraIssueDTO) {
-		this.setCommitDTO(commitDTO);
-		this.setJiraIssueDTO(jiraIssueDTO);
+	public ReleaseNoteDTO(CommitInfo commit, IssueInfo jiraIssue) {
+		this.setCommit(commit);
+		this.setJiraIssue(jiraIssue);
 	}
 
-	public CommitDTO getCommitDTO() {
-		return commitDTO;
+	public CommitInfo getCommit() {
+		return commit;
 	}
 
-	public void setCommitDTO(CommitDTO commitDTO) {
-		this.commitDTO = commitDTO;
+	public void setCommit(CommitInfo commit) {
+		this.commit = commit;
 	}
 
-	public IssueDTO getJiraIssueDTO() {
-		return jiraIssueDTO;
+	public IssueInfo getJiraIssue() {
+		return jiraIssue;
 	}
 
-	public void setJiraIssueDTO(IssueDTO jiraIssueDTO) {
-		this.jiraIssueDTO = jiraIssueDTO;
+	public void setJiraIssue(IssueInfo jiraIssue) {
+		this.jiraIssue = jiraIssue;
 	}
 
 }

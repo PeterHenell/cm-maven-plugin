@@ -1,9 +1,9 @@
 package se.peterhenell.cm.parsers;
 
-import se.peterhenell.cm.dto.IssueDTO;
+import se.peterhenell.cm.dto.IssueInfo;
 
 public interface IssueParser {
 
-	IssueDTO parse(String gitCommitMessage);
+	IssueInfo parse(String gitCommitMessage);
 
 }
