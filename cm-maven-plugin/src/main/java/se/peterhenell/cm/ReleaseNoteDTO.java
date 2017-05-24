@@ -1,11 +1,11 @@
 package se.peterhenell.cm;
 
 import se.peterhenell.cm.dto.CommitDTO;
-import se.peterhenell.cm.dto.JiraIssueDTO;
+import se.peterhenell.cm.dto.IssueDTO;
 
 public class ReleaseNoteDTO {
 
-	private JiraIssueDTO jiraIssueDTO;
+	private IssueDTO jiraIssueDTO;
 	private CommitDTO commitDTO;
 
 	@Override
@@ -13,7 +13,7 @@ public class ReleaseNoteDTO {
 		return "ReleaseNoteDTO [jiraIssueDTO=" + jiraIssueDTO + ", commitDTO=" + commitDTO + "]";
 	}
 
-	public ReleaseNoteDTO(CommitDTO commitDTO, JiraIssueDTO jiraIssueDTO) {
+	public ReleaseNoteDTO(CommitDTO commitDTO, IssueDTO jiraIssueDTO) {
 		this.setCommitDTO(commitDTO);
 		this.setJiraIssueDTO(jiraIssueDTO);
 	}
@@ -26,11 +26,11 @@ public class ReleaseNoteDTO {
 		this.commitDTO = commitDTO;
 	}
 
-	public JiraIssueDTO getJiraIssueDTO() {
+	public IssueDTO getJiraIssueDTO() {
 		return jiraIssueDTO;
 	}
 
-	public void setJiraIssueDTO(JiraIssueDTO jiraIssueDTO) {
+	public void setJiraIssueDTO(IssueDTO jiraIssueDTO) {
 		this.jiraIssueDTO = jiraIssueDTO;
 	}
 

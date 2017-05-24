@@ -3,24 +3,18 @@ package se.peterhenell.cm.parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.maven.plugin.logging.Log;
+import se.peterhenell.cm.IssueParser;
+import se.peterhenell.cm.Logging;
+import se.peterhenell.cm.dto.IssueDTO;
 
-import se.peterhenell.cm.dto.JiraIssueDTO;
+public class JiraIssueParser implements IssueParser {
 
-public class JiraIssueParser {
-
-	private Log logger;
-
-	public JiraIssueParser(Log log) {
-		if (null == log) {
-			log = new SysOutLogger();
-		}
-
-		this.logger = log;
+	public JiraIssueParser() {
 	}
 
-	public JiraIssueDTO parse(String gitCommitMessage) {
-		JiraIssueDTO dto = JiraIssueDTO.UnknownIssue;
+	@Override
+	public IssueDTO parse(String gitCommitMessage) {
+		IssueDTO dto = IssueDTO.UnknownIssue;
 		
 		Pattern r = Pattern.compile("(.*)-(\\d+)(.*)");
 
@@ -31,11 +25,11 @@ public class JiraIssueParser {
 				String jiraIssue = m.group(2).trim();
 				String message = m.group(3).trim();
 
-				dto = JiraIssueDTO.create(projectKey, jiraIssue, message);
+				dto = IssueDTO.create(projectKey, jiraIssue, message);
 			}
 		}
 		
-		logger.debug("Parse Result : " + dto.toString());
+		Logging.getLog().debug("Parse Result : " + dto.toString());
 		return dto;
 	}
 
