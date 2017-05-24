@@ -41,13 +41,12 @@ public class GitLogParser {
 			Iterable<RevCommit> logs = git.log().call();
 
 			for (RevCommit rev : logs) {
-
 				IssueDTO jiraIssue = issueParser.parse(rev.getFullMessage());
 
-				CommitDTO c = new CommitDTO(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(),
+				CommitDTO commit = new CommitDTO(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(),
 						rev.getId().toString(), rev.getCommitTime());
 
-				ReleaseNoteDTO releaseNote = new ReleaseNoteDTO(c, jiraIssue);
+				ReleaseNoteDTO releaseNote = new ReleaseNoteDTO(commit, jiraIssue);
 				commits.add(releaseNote);
 			}
 
