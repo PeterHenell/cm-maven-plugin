@@ -10,6 +10,14 @@ public class GitConfig {
 		return branch;
 	}
 
+	public void setPathToGitRepo(String pathToGitRepo) {
+		this.pathToGitRepo = pathToGitRepo;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
 	private String pathToGitRepo;
 
 	private String branch;

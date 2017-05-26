@@ -20,10 +20,16 @@ import se.peterhenell.cm.releasenotes.ReleaseNotesProducer;
 @Mojo(name = "createPackage")
 public class CreatePackageMojo extends BaseCMMojo {
     /**
-     * The version of the package.
+     * The version of the to be created package.
      */
     @Parameter(property = "createPackage.version", defaultValue = "${project.version}")
     private String version;
+
+    /**
+     * The version of the currently installed package.
+     */
+    @Parameter(property = "createPackage.previousVersion")
+    private String previousVersion;
 
     /**
      * The identity of the project
@@ -60,8 +66,12 @@ public class CreatePackageMojo extends BaseCMMojo {
         IssueParser jiraIssueParser = new JiraIssueParser();        
         GitLogParser parser = new GitLogParser(jiraIssueParser);
         
-        List<ReleaseNoteDTO> notes = parser.getGitLog(gitConfig);
+        List<ReleaseNoteDTO> notes = parser.getGitLog(previousVersion, version, gitConfig);
  
+        if (notes.isEmpty()) {
+			Logging.getLog().info("No Git Logs found between " + version + " and " + previousVersion );
+		}
+        
         ReleaseNotesProducer producer = new JsonReleaseNotesProducer();
         
         producer.Produce(notes);       

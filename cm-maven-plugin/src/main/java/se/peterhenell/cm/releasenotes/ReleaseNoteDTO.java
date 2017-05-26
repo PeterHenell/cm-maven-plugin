@@ -5,17 +5,17 @@ import se.peterhenell.cm.dto.IssueInfo;
 
 public class ReleaseNoteDTO {
 
-	private IssueInfo jiraIssue;
+	private IssueInfo issue;
 	private CommitInfo commit;
 
 	@Override
 	public String toString() {
-		return "ReleaseNoteDTO [jiraIssue=" + jiraIssue + ", commit=" + commit + "]";
+		return "ReleaseNoteDTO [Issue=" + issue + ", commit=" + commit + "]";
 	}
 
-	public ReleaseNoteDTO(CommitInfo commit, IssueInfo jiraIssue) {
+	public ReleaseNoteDTO(CommitInfo commit, IssueInfo issue) {
 		this.setCommit(commit);
-		this.setJiraIssue(jiraIssue);
+		this.setIssue(issue);
 	}
 
 	public CommitInfo getCommit() {
@@ -26,12 +26,12 @@ public class ReleaseNoteDTO {
 		this.commit = commit;
 	}
 
-	public IssueInfo getJiraIssue() {
-		return jiraIssue;
+	public IssueInfo getIssue() {
+		return issue;
 	}
 
-	public void setJiraIssue(IssueInfo jiraIssue) {
-		this.jiraIssue = jiraIssue;
+	public void setIssue(IssueInfo issue) {
+		this.issue = issue;
 	}
 
 }

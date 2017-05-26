@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -30,28 +33,35 @@ public class GitLogParser {
 		return repo;
 	}
 
-	public List<ReleaseNoteDTO> getGitLog(GitConfig gitConfig) {
+	public List<ReleaseNoteDTO> getGitLog(String previousVersion, String version, GitConfig gitConfig) {
 		List<ReleaseNoteDTO> commits = new ArrayList<>();
 
 		try {
 			Repository repository = getRepository(gitConfig);
 
-			Git git = new Git(repository);
-			Iterable<RevCommit> logs = git.log().call();
-
+			Iterable<RevCommit> logs = getJGitLogBetween(repository, previousVersion, version);
+			
 			for (RevCommit rev : logs) {
-				IssueInfo jiraIssue = issueParser.parse(rev.getFullMessage());
+				IssueInfo issue = issueParser.parse(rev.getFullMessage());
 
 				CommitInfo commit = new CommitInfo(rev.getFullMessage(), rev.getCommitterIdent().getEmailAddress(),
 						rev.getId().toString(), rev.getCommitTime());
 
-				ReleaseNoteDTO releaseNote = new ReleaseNoteDTO(commit, jiraIssue);
+				ReleaseNoteDTO releaseNote = new ReleaseNoteDTO(commit, issue);
 				commits.add(releaseNote);
 			}
-
 		} catch (Exception e) {
-			Logging.getLog().error(e.getMessage());
+			Logging.getLog().error(e.toString());
 		}
 		return commits;
+	}
+		
+	private Iterable<RevCommit> getJGitLogBetween(final Repository repository, final String rev1, final String rev2) throws IOException, GitAPIException {
+		ObjectId since = repository.resolve(rev1);
+		ObjectId until = repository.resolve(rev2);
+			
+		return new Git(repository).log()
+				.addRange(since, until)
+				.call();
 	}
 }
