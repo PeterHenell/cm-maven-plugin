@@ -1,4 +1,4 @@
-package se.peterhenell.cm;
+package se.peterhenell.cmojo;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +15,9 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import se.peterhenell.cm.parsers.GitLogParser;
-import se.peterhenell.cm.parsers.JiraIssueParser;
-import se.peterhenell.cm.releasenotes.ReleaseNoteDTO;
+import se.peterhenell.cmojo.parsers.GitLogParser;
+import se.peterhenell.cmojo.parsers.JiraIssueParser;
+import se.peterhenell.cmojo.releasenotes.ReleaseNoteDTO;
 
 /**
  * Unit test for simple App.

@@ -34,9 +34,9 @@
 				<executions>
 					<execution>
 						<phase>compile</phase>
-						<configuration>
-							<version>730e6ef34aabfa67ec206d444e21ed1eec824135</version>
-							<previousVersion>d0e5b9d13362c3c891efb18dea018058153aa0c5</previousVersion>
+						<configuration>							
+							<previousVersion>730e6ef34aabfa67ec206d444e21ed1eec824135</previousVersion>
+							<version>d0e5b9d13362c3c891efb18dea018058153aa0c5</version>
 							<gitConfig>
 								<pathToGitRepo>C:\src\github\cm-maven-plugin</pathToGitRepo>
 								<branch>master</branch>

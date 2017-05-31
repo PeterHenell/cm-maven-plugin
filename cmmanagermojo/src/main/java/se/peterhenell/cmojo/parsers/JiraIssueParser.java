@@ -1,10 +1,10 @@
-package se.peterhenell.cm.parsers;
+package se.peterhenell.cmojo.parsers;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import se.peterhenell.cm.Logging;
-import se.peterhenell.cm.dto.IssueInfo;
+import se.peterhenell.cmojo.Logging;
+import se.peterhenell.cmojo.dto.IssueInfo;
 
 public class JiraIssueParser implements IssueParser {
 
