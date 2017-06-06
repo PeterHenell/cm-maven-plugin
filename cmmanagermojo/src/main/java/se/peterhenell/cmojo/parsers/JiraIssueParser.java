@@ -14,7 +14,7 @@ public class JiraIssueParser implements IssueParser {
 	@Override
 	public IssueInfo parse(String gitCommitMessage) {
 		IssueInfo dto = IssueInfo.UnknownIssue;
-		
+
 		Pattern r = Pattern.compile("(.*)-(\\d+)(.*)");
 
 		Matcher m = r.matcher(gitCommitMessage);
@@ -27,7 +27,7 @@ public class JiraIssueParser implements IssueParser {
 				dto = IssueInfo.create(projectKey, jiraIssue, message);
 			}
 		}
-		
+
 		//Logging.getLog().debug("Parse Result : " + dto.toString());
 		return dto;
 	}
